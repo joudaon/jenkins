@@ -237,3 +237,8 @@ freeStyleJob('jobName') {
 //     ruleSetFiles = files("/pathto/ruleset.xml")
 // }
 //// End Jenkins Plugins configuration
+
+////////////////////////////////////
+/// Gitlab webhook configuration ///
+////////////////////////////////////
+// https://docs.bitnami.com/aws/how-to/create-ci-pipeline/
