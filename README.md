@@ -4,8 +4,16 @@ Templates are imported as a DSL job in Jenkins and then new jobs or views are cr
 
 ## TOC
 
-- [Jenkins Job DSL API](#jenkins-job-dsl-api)
-- [Updating Credentials](#updating-credentials)
+- [Jenkins](#jenkins)
+    - [TOC](#toc)
+    - [Jenkins Job DSL API](#jenkins-job-dsl-api)
+        - [Summary](#summary)
+    - [Updating Credentials](#updating-credentials)
+    - [Plugins](#plugins)
+        - [JUnit (Official Site)](#junit-official-site)
+        - [MSBuild (Official Site)](#msbuild-official-site)
+        - [MSTestRunner (Official Site)](#mstestrunner-official-site)
+    - [Useful links](#useful-links)
 
 ## Jenkins Job DSL API
 
