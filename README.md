@@ -1,62 +1,71 @@
-# Jenkins
+- [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.publisher.PublisherContext.archiveJunit)
+# Jenkins Jobs
 
-Templates are imported as a DSL job in Jenkins and then new jobs or views are created from these templates.
+These templates are imported as a DSL job in Jenkins and then new jobs are created from these templates.
 
 ## TOC
 
-- [Jenkins](#jenkins)
-    - [TOC](#toc)
-    - [Jenkins Job DSL API](#jenkins-job-dsl-api)
-        - [Summary](#summary)
-    - [Updating Credentials](#updating-credentials)
-    - [Plugins](#plugins)
-        - [AnsiColor (Official Site)](#ansicolor-official-site)
-        - [CloudBees Docker Build and Publish (Official Site)](#cloudbees-docker-build-and-publish-official-site)
-        - [Email Extension (Official Site)](#email-extension-official-site)
-        - [Environment Injector (EnvInject) (Official Site)](#environment-injector-envinject-official-site)
-        - [Git Parameter (Official Site)](#git-parameter-official-site)
-        - [JaCoCo (Official Site)](#jacoco-official-site)
-        - [Jenkins user build vars (Official Site)](#jenkins-user-build-vars-official-site)
-        - [Job Configuration History (Official Site)](#job-configuration-history-official-site)
-        - [Job DSL (Official Site)](#job-dsl-official-site)
-        - [JUnit (Official Site)](#junit-official-site)
-        - [Locale (Official Site)](#locale-official-site)
-        - [MSBuild (Official Site)](#msbuild-official-site)
-        - [MSTest (Official Site)](#mstest-official-site)
-        - [MSTestRunner (Official Site)](#mstestrunner-official-site)
-        - [Test Results Analyzer (Official Site)](#test-results-analyzer-official-site)
-        - [Parameterized Scheduler plugin (Official Site)](#parameterized-scheduler-plugin-official-site)
-        - [PostBuildScript (Official Site)](#postbuildscript-official-site)
-        - [PowerShell (Official Site)](#powershell-official-site)
-        - [Simple Theme (Official Site)](#simple-theme-official-site)
-        - [/userContent in Git (Official Site)](#usercontent-in-git-official-site)
-        - [xUnit (Official Site)](#xunit-official-site)
-    - [Custom scripts:](#custom-scripts)
-        - [(Linux) Display all characters between 'n' and 'c' characters](#linux-display-all-characters-between-n-and-c-characters)
-        - [(Powershell) Display version number from a file](#powershell-display-version-number-from-a-file)
-    - [Additional links:](#additional-links)
+- [Jenkins Jobs](#jenkins-jobs)
+  - [TOC](#toc)
+  - [Jenkins Job DSL API](#jenkins-job-dsl-api)
+  - [Summary](#summary)
+  - [Updating Credentials](#updating-credentials)
+  - [Plugins](#plugins)
+    - [AnsiColor (Official Site)](#ansicolor-official-site)
+    - [CloudBees Docker Build and Publish (Official Site)](#cloudbees-docker-build-and-publish-official-site)
+    - [Email Extension (Official Site)](#email-extension-official-site)
+    - [Environment Injector (EnvInject) (Official Site)](#environment-injector-envinject-official-site)
+    - [Git Parameter (Official Site)](#git-parameter-official-site)
+    - [JaCoCo (Official Site)](#jacoco-official-site)
+    - [Jenkins user build vars (Official Site)](#jenkins-user-build-vars-official-site)
+    - [Job Configuration History (Official Site)](#job-configuration-history-official-site)
+    - [Job DSL (Official Site)](#job-dsl-official-site)
+    - [JUnit (Official Site)](#junit-official-site)
+    - [Locale (Official Site)](#locale-official-site)
+    - [MSBuild (Official Site)](#msbuild-official-site)
+    - [MSTest (Official Site)](#mstest-official-site)
+    - [MSTestRunner (Official Site)](#mstestrunner-official-site)
+    - [Test Results Analyzer (Official Site)](#test-results-analyzer-official-site)
+    - [Parameterized Scheduler plugin (Official Site)](#parameterized-scheduler-plugin-official-site)
+    - [PostBuildScript (Official Site)](#postbuildscript-official-site)
+    - [PowerShell (Official Site)](#powershell-official-site)
+    - [Warnings Next Generation (Official Site)](#warnings-next-generation-official-site)
+    - [Sidebar Link (Official Site)](#sidebar-link-official-site)
+    - [Simple Theme (Official Site)](#simple-theme-official-site)
+    - [/userContent in Git (Official Site)](#usercontent-in-git-official-site)
+    - [xUnit (Official Site)](#xunit-official-site)
+  - [Delete Jenkins workspace @tmp files using crontab and scheduler](#delete-jenkins-workspace-tmp-files-using-crontab-and-scheduler)
+    - [Linux](#linux)
+    - [Windows](#windows)
+  - [Custom scripts:](#custom-scripts)
+    - [(Linux) Display all characters between 'Version' and ']' characters](#linux-display-all-characters-between-version-and--characters)
+    - [(Powershell) Display version number from a file](#powershell-display-version-number-from-a-file)
+    - [(Linux) Date format](#linux-date-format)
+    - [(Windows) Date format](#windows-date-format)
+  - [Additional links:](#additional-links)
 
 ## Jenkins Job DSL API
 
 The job-dsl-plugin allows the programmatic creation of projects using a DSL. Pushing job creation into a script allows you to automate and standardize your Jenkins installation, unlike anything possible before.
 
-### Summary
+## Summary
 
 Jenkins is a wonderful system for managing builds, and people love using its UI to configure jobs. Unfortunately, as the number of jobs grows, maintaining them becomes tedious, and the paradigm of using a UI falls apart. Additionally, the common pattern in this situation is to copy jobs to create new ones, these "children" have a habit of diverging from their original "template" and consequently it becomes difficult to maintain consistency between these jobs.
+
 The Jenkins job-dsl-plugin attempts to solve this problem by allowing jobs to be defined with the absolute minimum necessary in a programmatic form, with the help of templates that are synced with the generated jobs. The goal is for your project to be able to define all the jobs they want to be related to their project, declaring their intent for the jobs, leaving the common stuff up to a template that were defined earlier or hidden behind the DSL.
 
-More info at: [Jenkins Job DSL API](https://jenkinsci.github.io/job-dsl-plugin/) and [Job DSL Plugin](https://wiki.jenkins.io/display/JENKINS/Job+DSL+Plugin)
+More info at: [Jenkins Job DSL API](https://jenkinsci.github.io/job-dsl-plugin/) and [Job DSL Plugin](https://wiki.jenkins.io/display/JENKINS/Job+DSL+Plugin).
 
 ## Updating Credentials
 
-In some cases we will find **credentialsid** inside our Groovy files. These credentials need to be updated with a new ones. For that we will go to Jenkins.
+In some cases we will find **yourcredentials** inside our Groovy files. These credentials need to be updated with a new ones. For that we will go to Jenkins.
 
 * Go to credentials
 * Click **Jenkins** (under 'Stores scoped to Jenkins')
 * Click **Global credentials (unrestricted)** (under 'System')
 * On the left side click on **Add Credentials**
 
-Once our credentials are created a new ID will be generated. This **ID** should be replaced on **credentialsid**.
+Once our credentials are created a new ID will be generated. This **ID** should be replaced on **yourcredentials**.
 
 ## Plugins
 
@@ -97,7 +106,7 @@ Saves copies of all job and system configurations.
 ### Job DSL ([Official Site](https://plugins.jenkins.io/job-dsl))
 The job-dsl-plugin allows the programmatic creation of projects using a DSL. Pushing job creation into a script allows you to automate and standardize your Jenkins installation, unlike anything possible before.
 
-### JUnit [(Official Site)](https://plugins.jenkins.io/junit)
+### JUnit ([Official Site](https://plugins.jenkins.io/junit))
 Allows JUnit-format test results to be published.
 
 - [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.publisher.PublisherContext.archiveJunit)
@@ -105,7 +114,7 @@ Allows JUnit-format test results to be published.
 ### Locale ([Official Site](https://plugins.jenkins.io/locale))
 This plugin controls the language of JenkinsNormally, Jenkins honors the browser's language preference if a translation is available for the preferred language, and uses the system default locale for messages during a build. 
 
-### MSBuild [(Official Site)](https://plugins.jenkins.io/msbuild)
+### MSBuild ([Official Site](https://plugins.jenkins.io/msbuild))
 This plugin allows you to use MSBuild to build .NET projects.
 
 - [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.step.StepContext.msBuild)
@@ -142,6 +151,17 @@ Please refer to the plugin description for further information.
 Provides Jenkins integration with Windows PowerShell
 - [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.step.StepContext.powerShell)
 
+### Warnings Next Generation ([Official Site](https://plugins.jenkins.io/warnings-ng))
+This plugin collects compiler warnings or issues reported by static analysis tools and visualizes the results.
+Jenkins' Warnings Next Generation Plugin collects compiler warnings or issues reported by static analysis tools and visualizes the results. It has built-in support for almost hundred static analysis tools (including several compilers), see the list of supported report formats. It replaces the Jenkins Static Analysis Suite that has been part of the Jenkins plugin eco-system for more than ten years now. I.e. it makes the following Jenkins plugins obsolete: Android Lint, CheckStyle, Dry, FindBugs, PMD, Warnings, Static Analysis Utilities, Static Analysis Collector Plugins, Task Scanner, etc. 
+- [DSL information](http://localhost:8080/plugin/job-dsl/api-viewer/index.html#method/javaposse.jobdsl.dsl.helpers.publisher.PublisherContext.recordIssues)
+- [More information](https://issues.jenkins-ci.org/browse/JENKINS-55379)
+
+### Sidebar Link ([Official Site](https://plugins.jenkins.io/sidebar-link))
+Add links in the sidebar of the Jenkins main page, view tabs and project pages.This simple plugin adds an Additional Sidebar Links section in the main Jenkins configuration page, with settings for link URLs, texts and icons. These links will be shown in the top-level Jenkins pages (main page, user list, build history, My Projects and other project view tabs). Sidebar links for particular jobs may also be added in the job configuration pages.
+
+- [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.properties.PropertiesContext.sidebarLinks)
+
 ### Simple Theme ([Official Site](https://plugins.jenkins.io/simple-theme-plugin))
 This plugin allows to customize Jenkin's appearance with custom CSS and JavaScript. It also allows to replace the Favicon. 
 
@@ -156,10 +176,45 @@ Once this plugin is installed, see http://yourserver/jenkins/userContent.git in 
 This plugin makes it possible to publish the test results of an execution of a testing tool in Jenkins. 
 - [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.publisher.PublisherContext.archiveXUnit)
 
+## Delete Jenkins workspace @tmp files using crontab and scheduler
+
+### Linux
+
+To edit or create your own crontab file (for specific user), type the following command at the UNIX / Linux shell prompt:
+
+    $ crontab -e
+
+Then type in the file:
+
+    # Delete Jenkins @tmp folders in /var/lib/jenkins/workspace. From mon-fri at 09:00
+    0 9 * * 1-5 rm -rf /var/lib/jenkins/workspace/*@tmp
+
+After saving a new file (username) will be created in: /var/spool/cron/crontabs/
+
+To check if the cron has been run we perform the following command:
+
+    $> tailf -n 100 /var/log/syslog | grep CRON
+
+### Windows
+
+Open "Task Scheduler" and add the "delete_jenkins" task.
+
+We will start Powershell program with arguments:
+
+    Program: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+    Arguments: Remove-Item -Path C:\Jenkins\workspace\* -Filter *@tmp
+
+We add the desired trigger, for example everyday at 09:00 am.
+
 ## Custom scripts:
 
-### (Linux) Display all characters between 'n' and 'c' characters
-    version=$(sed -n '1p' changelog.txt | sed 's/.*n \(.*\)]/\1/')
+### (Linux) Display all characters between 'Version' and ']' characters
+    version=$(sed -n '1p' changelog.txt | sed 's/.*Version \(.*\)].*/\1/')
+    # ------------------------------- #
+    Example:
+    changelog.txt
+    [Version 1.0.0] 2018/01/01
+    Output: 1.0.0
 
 ### (Powershell) Display version number from a file
 
@@ -177,8 +232,15 @@ This plugin makes it possible to publish the test results of an execution of a t
     [Version 1.0.0]
     Output: 1.0.0
 
-## Additional links:
+### (Linux) Date format
 
+    echo Date: $(date +"%Y/%m/%d at %T")
+
+### (Windows) Date format
+
+    Get-Date -UFormat "%Y/%m/%d at %H:%M:%S"
+
+## Additional links:
 - [Install Powershell 5 in Windows Server 2008 R2](https://www.rootusers.com/install-powershell-5-windows-server-2008-r2/)
 - [Download WMF 5.0 (Win8.1AndW2K12R2-KB3134758-x64.msu)](https://www.microsoft.com/en-ie/download/details.aspx?id=50395)
 - [Script is not digitally signed](http://tritoneco.com/2014/02/21/fix-for-powershell-script-not-digitally-signed/)
@@ -205,4 +267,13 @@ This plugin makes it possible to publish the test results of an execution of a t
 - [stop and delete docker container if its running without errors](https://stackoverflow.com/questions/34228864/stop-and-delete-docker-container-if-its-running)
 - [Configure Jenkins MSTest Tests Execution](https://www.automatetheplanet.com/configure-jenkins-mstest-execution/)
 - [How do I display all the characters between two specific strings?](https://unix.stackexchange.com/questions/273496/how-do-i-display-all-the-characters-between-two-specific-strings)
-- [Job-dsl-plugin support for parameterized scheduler plugin](https://issues.jenkins-ci.org/browse/JENKINS-42893)
+- [How-to-pass-variables-from-jenkinsfile-to-shell-command](https://stackoverflow.com/questions/41539076/how-to-pass-variables-from-jenkinsfile-to-shell-command)
+- [Using Email-ext plugin in Jenkins pipeline](http://ikeptwalking.com/using-email-ext-plugin-in-jenkins-pipeline/)
+- [Github - email-ext-plugin templates](https://github.com/jenkinsci/email-ext-plugin/tree/master/src/main/resources/hudson/plugins/emailext/templates)
+- [Publish pretty cucumber reports on Jenkins](https://github.com/jenkinsci/cucumber-reports-plugin)
+- [Pattern to get string between two specific words/characters using grep [duplicate]](https://stackoverflow.com/questions/21077882/pattern-to-get-string-between-two-specific-words-characters-using-grep)
+- [Where is the cron / crontab log?](https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log)
+- [Verify if crontab works](https://askubuntu.com/questions/85558/verify-if-crontab-works)
+- [How to redirect output to a file from within cron?](https://unix.stackexchange.com/questions/52330/how-to-redirect-output-to-a-file-from-within-cron)
+- [how to run cron jobs as a specific user other than root in linux](http://www.lostsaloon.com/technology/how-to-run-cron-jobs-as-a-specific-user/)
+- [Gray filled box icon](https://www.iconsdb.com/gray-icons/filled-box-icon.html)
