@@ -92,6 +92,8 @@ EnvInject plugin provides the following features:
 
 ### Git Parameter ([Official Site](https://plugins.jenkins.io/git-parameter))
 Adds ability to choose branches, tags or revisions from git repository configured in project.
+- [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#plugin/git-parameter)
+- [More information](https://issues.jenkins-ci.org/browse/JENKINS-49438)
 
 ### JaCoCo ([Official Site](https://plugins.jenkins.io/jacoco))
 This plugin allows you to capture code coverage report from JaCoCo. Jenkins will generate the trend report of coverage and some other statistics.
