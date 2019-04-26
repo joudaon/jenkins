@@ -1,4 +1,3 @@
-- [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.publisher.PublisherContext.archiveJunit)
 # Jenkins Jobs
 
 These templates are imported as a DSL job in Jenkins and then new jobs are created from these templates.
@@ -11,11 +10,14 @@ These templates are imported as a DSL job in Jenkins and then new jobs are creat
   - [Summary](#summary)
   - [Updating Credentials](#updating-credentials)
   - [Plugins](#plugins)
+    - [Active Choices (Official Site)](#active-choices-official-site)
     - [AnsiColor (Official Site)](#ansicolor-official-site)
     - [CloudBees Docker Build and Publish (Official Site)](#cloudbees-docker-build-and-publish-official-site)
+    - [Docker Plugin (Official Site)](#docker-plugin-official-site)
     - [Email Extension (Official Site)](#email-extension-official-site)
     - [Environment Injector (EnvInject) (Official Site)](#environment-injector-envinject-official-site)
     - [Git Parameter (Official Site)](#git-parameter-official-site)
+    - [InfluxDB (Official Site)](#influxdb-official-site)
     - [JaCoCo (Official Site)](#jacoco-official-site)
     - [Jenkins user build vars (Official Site)](#jenkins-user-build-vars-official-site)
     - [Job Configuration History (Official Site)](#job-configuration-history-official-site)
@@ -27,11 +29,15 @@ These templates are imported as a DSL job in Jenkins and then new jobs are creat
     - [MSTestRunner (Official Site)](#mstestrunner-official-site)
     - [Test Results Analyzer (Official Site)](#test-results-analyzer-official-site)
     - [Parameterized Scheduler plugin (Official Site)](#parameterized-scheduler-plugin-official-site)
+    - [Pipeline Utility Steps(Official Site)](#pipeline-utility-stepsofficial-site)
     - [PostBuildScript (Official Site)](#postbuildscript-official-site)
     - [PowerShell (Official Site)](#powershell-official-site)
+    - [Prometheus metrics (Official Site)](#prometheus-metrics-official-site)
     - [Warnings Next Generation (Official Site)](#warnings-next-generation-official-site)
     - [Sidebar Link (Official Site)](#sidebar-link-official-site)
     - [Simple Theme (Official Site)](#simple-theme-official-site)
+    - [Slack Notification (Official Site)](#slack-notification-official-site)
+    - [SonarQube Scanner (Official Site)](#sonarqube-scanner-official-site)
     - [/userContent in Git (Official Site)](#usercontent-in-git-official-site)
     - [xUnit (Official Site)](#xunit-official-site)
   - [Delete Jenkins workspace @tmp files using crontab and scheduler](#delete-jenkins-workspace-tmp-files-using-crontab-and-scheduler)
@@ -69,11 +75,17 @@ Once our credentials are created a new ID will be generated. This **ID** should 
 
 ## Plugins
 
+### Active Choices ([Official Site](https://plugins.jenkins.io/uno-choice))
+The Active Choices plugin allows the creation of dynamic and interactive parameters for freestyle Jenkins jobs. Active Choice parameters can be dynamically updated and can be rendered as combo-boxes, check-boxes, radio-buttons or rich HTML.
+
 ### AnsiColor ([Official Site](https://plugins.jenkins.io/ansicolor))
 This plugin adds support for ANSI escape sequences, including color, to Console Output
 
 ### CloudBees Docker Build and Publish ([Official Site](https://plugins.jenkins.io/docker-build-publish))
 This plugin provides the ability to build projects with a Dockerfile, and publish the resultant tagged image (repo) to the docker registry.
+
+### Docker Plugin ([Official Site](https://plugins.jenkins.io/docker-plugin))
+This plugin allows slaves to be dynamically provisioned using Docker.
 
 ### Email Extension ([Official Site](https://plugins.jenkins.io/email-ext))
 This plugin allows you to configure every aspect of email notifications. You can customize when an email is sent, who should receive it, and what the email says.
@@ -88,12 +100,18 @@ EnvInject plugin provides the following features:
 - Injects environment variables as a build step for a run
 - Injects password values for a run
 - Exports environment variables at the end of the build in order to to know the set of environment variables used for each build
+
 - [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.step.StepContext.environmentVariables)
 
 ### Git Parameter ([Official Site](https://plugins.jenkins.io/git-parameter))
 Adds ability to choose branches, tags or revisions from git repository configured in project.
-- [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#plugin/git-parameter)
+- [DSL information](http://localhost:8080/plugin/job-dsl/api-viewer/index.html#method/javaposse.jobdsl.dsl.helpers.BuildParametersContext.gitParameter)
 - [More information](https://issues.jenkins-ci.org/browse/JENKINS-49438)
+
+### InfluxDB ([Official Site](https://plugins.jenkins.io/influxdb))
+Sends Jenkins build metrics into InfluxDB.
+
+- [DSL information](http://localhost:8080/plugin/job-dsl/api-viewer/index.html#method/javaposse.jobdsl.dsl.helpers.publisher.PublisherContext.influxDbPublisher)
 
 ### JaCoCo ([Official Site](https://plugins.jenkins.io/jacoco))
 This plugin allows you to capture code coverage report from JaCoCo. Jenkins will generate the trend report of coverage and some other statistics.
@@ -138,6 +156,9 @@ This plugin is for configuring a cron style timer schedule for parameterized bui
 Further information:
 - https://issues.jenkins-ci.org/browse/JENKINS-42893
 
+### Pipeline Utility Steps([Official Site](https://plugins.jenkins.io/pipeline-utility-steps))
+Small, miscellaneous, cross platform utility steps for Pipeline Plugin jobs
+
 ### PostBuildScript ([Official Site](https://plugins.jenkins.io/postbuildscript))
 This plugin allows you to run the following actions after a build:
 
@@ -153,6 +174,9 @@ Please refer to the plugin description for further information.
 Provides Jenkins integration with Windows PowerShell
 - [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.step.StepContext.powerShell)
 
+### Prometheus metrics ([Official Site](https://plugins.jenkins.io/prometheus))
+Exposes a Prometheus metrics endpoint.
+
 ### Warnings Next Generation ([Official Site](https://plugins.jenkins.io/warnings-ng))
 This plugin collects compiler warnings or issues reported by static analysis tools and visualizes the results.
 Jenkins' Warnings Next Generation Plugin collects compiler warnings or issues reported by static analysis tools and visualizes the results. It has built-in support for almost hundred static analysis tools (including several compilers), see the list of supported report formats. It replaces the Jenkins Static Analysis Suite that has been part of the Jenkins plugin eco-system for more than ten years now. I.e. it makes the following Jenkins plugins obsolete: Android Lint, CheckStyle, Dry, FindBugs, PMD, Warnings, Static Analysis Utilities, Static Analysis Collector Plugins, Task Scanner, etc. 
@@ -166,6 +190,14 @@ Add links in the sidebar of the Jenkins main page, view tabs and project pages.T
 
 ### Simple Theme ([Official Site](https://plugins.jenkins.io/simple-theme-plugin))
 This plugin allows to customize Jenkin's appearance with custom CSS and JavaScript. It also allows to replace the Favicon. 
+
+### Slack Notification ([Official Site](https://plugins.jenkins.io/slack))
+Provides Jenkins notification integration with Slack or Slack compatible applications like RocketChat and Mattermost.
+
+### SonarQube Scanner ([Official Site](https://plugins.jenkins.io/sonar))
+This plugin allow easy integration of SonarQube™, the open source platform for Continuous Inspection of code quality.
+
+- [Information](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Jenkins)
 
 ### /userContent in Git ([Official Site](https://plugins.jenkins.io/git-userContent))
 Jenkins has a mechanism known as "User Content", where administrators can place files inside $JENKINS_HOME/userContent, and these files are served from http://yourhost/jenkins/userContent. This can be thought of as a mini HTTP server to serve images, stylesheets, and other static resources that you can use from various description fields inside Jenkins.
@@ -279,3 +311,21 @@ We add the desired trigger, for example everyday at 09:00 am.
 - [How to redirect output to a file from within cron?](https://unix.stackexchange.com/questions/52330/how-to-redirect-output-to-a-file-from-within-cron)
 - [how to run cron jobs as a specific user other than root in linux](http://www.lostsaloon.com/technology/how-to-run-cron-jobs-as-a-specific-user/)
 - [Gray filled box icon](https://www.iconsdb.com/gray-icons/filled-box-icon.html)
+- [Error: Error applying plan: 1 error(s) occurred: * vsphere_virtual_machine.vm_3: cannot locate virtual machine or template with UUID "423908f8-54b3-432c-5f2b-ff6b8aee5a32": ServerFaultCode: The session is not authenticated](https://github.com/terraform-providers/terraform-provider-vsphere/issues/664)
+- [How do I display all the characters between two specific strings?](https://unix.stackexchange.com/questions/273496/how-do-i-display-all-the-characters-between-two-specific-strings)
+- [Jenkins Pipeline](https://santoshbandage.wordpress.com/2017/06/12/why-pipeline/)
+- [How to check if a string contains a substring in Bash](https://stackoverflow.com/questions/229551/how-to-check-if-a-string-contains-a-substring-in-bash)
+- [How to determine if a string is a substring of another in bash?](https://askubuntu.com/questions/299710/how-to-determine-if-a-string-is-a-substring-of-another-in-bash)
+- [<string> contains <substring> in bash](https://timmurphy.org/2013/05/13/string-contains-substring-in-bash/)
+- [Git asks for username every time I push](https://stackoverflow.com/questions/11403407/git-asks-for-username-every-time-i-push)
+- [git-credential-store (1) - Linux Man Pages](https://www.systutorials.com/docs/linux/man/1-git-credential-store/)
+- [How to configure automatic password handling for git commands:](https://superuser.com/questions/812931/how-to-configure-automatic-password-handling-for-git-commands)
+- [How to setup Git Credential store in Windows](https://agilewarrior.wordpress.com/2017/09/25/how-to-setup-git-credential-store-in-windows/)
+- [How to set current build result in Pipeline?](https://support.cloudbees.com/hc/en-us/articles/218554077-How-to-set-current-build-result-in-Pipeline-)
+- [Compiling .Net project - NET Framework Developer Pack](https://www.microsoft.com/en-us/download/details.aspx?id=56119)
+- [Jenkins Master and Slaves as Docker Containers](https://rafaelnexus.com/tutorials/jenkins-master-and-slaves-as-docker-containers/)
+- [How To Setup Docker Containers As Build Slaves For Jenkins](https://devopscube.com/docker-containers-as-build-slaves-jenkins/])
+- [Setup Jenkins Master And Build Slaves As Docker Container](https://devopscube.com/jenkins-master-build-slaves-docker-container/)
+- [Monitoring Jenkins with Grafana and Prometheus:](https://medium.com/@eng.mohamed.m.saeed/monitoring-jenkins-with-grafana-and-prometheus-a7e037cbb376)
+- [Delivery Pipelines, with Jenkins 2, SonarQube, and Artifactory](https://jenkins.io/blog/2017/04/18/continuousdelivery-devops-sonarqube/)
+- [Analyzing with SonarQube Scanner for Jenkins](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Jenkins)
