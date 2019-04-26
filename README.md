@@ -328,4 +328,4 @@ We add the desired trigger, for example everyday at 09:00 am.
 - [Setup Jenkins Master And Build Slaves As Docker Container](https://devopscube.com/jenkins-master-build-slaves-docker-container/)
 - [Monitoring Jenkins with Grafana and Prometheus:](https://medium.com/@eng.mohamed.m.saeed/monitoring-jenkins-with-grafana-and-prometheus-a7e037cbb376)
 - [Delivery Pipelines, with Jenkins 2, SonarQube, and Artifactory](https://jenkins.io/blog/2017/04/18/continuousdelivery-devops-sonarqube/)
-- [Analyzing with SonarQube Scanner for Jenkins](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Jenkins){:target="_blank"}
+- [Analyzing with SonarQube Scanner for Jenkins](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Jenkins)
