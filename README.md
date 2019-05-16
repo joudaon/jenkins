@@ -329,3 +329,6 @@ We add the desired trigger, for example everyday at 09:00 am.
 - [Monitoring Jenkins with Grafana and Prometheus:](https://medium.com/@eng.mohamed.m.saeed/monitoring-jenkins-with-grafana-and-prometheus-a7e037cbb376)
 - [Delivery Pipelines, with Jenkins 2, SonarQube, and Artifactory](https://jenkins.io/blog/2017/04/18/continuousdelivery-devops-sonarqube/)
 - [Analyzing with SonarQube Scanner for Jenkins](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Jenkins)
+- [Changing Jenkins build number](https://stackoverflow.com/questions/19645430/changing-jenkins-build-number)
+- [Jenkins pipeline plugin: set the build description](https://stackoverflow.com/questions/36501203/jenkins-pipeline-plugin-set-the-build-description)
+- [HTML in job descriptions on jenkins](https://www.edureka.co/community/13612/html-in-job-descriptions-on-jenkins)
