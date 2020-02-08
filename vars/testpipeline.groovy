@@ -5,7 +5,7 @@ def call () {
         agent any
 
         libraries {
-        lib('jon@master')
+            lib('jon@master')
         }
 
         stages {
