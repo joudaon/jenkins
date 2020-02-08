@@ -49,6 +49,7 @@ These templates are imported as a DSL job in Jenkins and then new jobs are creat
     - [(Linux) Date format](#linux-date-format)
     - [(Windows) Date format](#windows-date-format)
   - [Additional links:](#additional-links)
+  - [Shared libraries links](#shared-libraries-links)
 
 ## Jenkins Job DSL API
 
@@ -332,3 +333,6 @@ We add the desired trigger, for example everyday at 09:00 am.
 - [Changing Jenkins build number](https://stackoverflow.com/questions/19645430/changing-jenkins-build-number)
 - [Jenkins pipeline plugin: set the build description](https://stackoverflow.com/questions/36501203/jenkins-pipeline-plugin-set-the-build-description)
 - [HTML in job descriptions on jenkins](https://www.edureka.co/community/13612/html-in-job-descriptions-on-jenkins)
+
+## Shared libraries links
+- [Jenkins DevOps Shared Libraries](https://github.com/mschuchard/jenkins-devops-libs)
