@@ -336,3 +336,9 @@ We add the desired trigger, for example everyday at 09:00 am.
 
 ## Shared libraries links
 - [Jenkins DevOps Shared Libraries](https://github.com/mschuchard/jenkins-devops-libs)
+- [jenkins-shared-library-framework](https://github.com/devopscube/jenkins-shared-library-framework)
+- [Project Piper Repository](https://github.com/SAP/jenkins-library)
+- [CFPB Jenkins Pipeline Shared Libraries](https://github.com/cfpb/jenkins-shared-libraries)
+- [jenkins-pipeline-shared-lib](https://github.com/BCDevOps/jenkins-pipeline-shared-lib)
+- [Jenkins Pipeline Shared Library Sample](https://github.com/AndreyVMarkelov/jenkins-pipeline-shared-lib-sample)
+- [Jenkins Pipeline Shared Library Gradle Plugin](https://github.com/mkobit/jenkins-pipeline-shared-library-example)
