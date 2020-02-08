@@ -1,16 +1,18 @@
 #!/usr/bin/env groovy
 
-pipeline {
-    agent any
+def call () {
+    pipeline {
+        agent any
 
-    libraries {
-      lib('jon@master')
-    }
+        libraries {
+        lib('jon@master')
+        }
 
-    stages {
-        stage ('test') {
-            steps {
-                hello('jon')
+        stages {
+            stage ('test') {
+                steps {
+                    hello('jon')
+                }
             }
         }
     }
