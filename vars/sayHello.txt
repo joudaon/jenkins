@@ -1,0 +1,11 @@
+<strong>sayHello (String name)</strong>
+    <p>
+        Says Hello with custon name.
+        Default: 'human'
+    </p>
+    <p>
+        <strong>Defaults:</strong>
+        <ul>
+            <li>name: 'human'</li>
+        </ul>
+    </p>

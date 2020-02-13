@@ -12,10 +12,12 @@ These templates are imported as a DSL job in Jenkins and then new jobs are creat
   - [Plugins](#plugins)
     - [Active Choices (Official Site)](#active-choices-official-site)
     - [AnsiColor (Official Site)](#ansicolor-official-site)
+    - [Authorize Project (https://plugins.jenkins.io/authorize-project)](#authorize-project-httpspluginsjenkinsioauthorize-project)
     - [CloudBees Docker Build and Publish (Official Site)](#cloudbees-docker-build-and-publish-official-site)
     - [Docker Plugin (Official Site)](#docker-plugin-official-site)
     - [Email Extension (Official Site)](#email-extension-official-site)
     - [Environment Injector (EnvInject) (Official Site)](#environment-injector-envinject-official-site)
+    - [Extra Columns (Official Site)](#extra-columns-official-site)
     - [Git Parameter (Official Site)](#git-parameter-official-site)
     - [InfluxDB (Official Site)](#influxdb-official-site)
     - [JaCoCo (Official Site)](#jacoco-official-site)
@@ -40,16 +42,22 @@ These templates are imported as a DSL job in Jenkins and then new jobs are creat
     - [SonarQube Scanner (Official Site)](#sonarqube-scanner-official-site)
     - [/userContent in Git (Official Site)](#usercontent-in-git-official-site)
     - [xUnit (Official Site)](#xunit-official-site)
+  - [Jenkins useful folder paths](#jenkins-useful-folder-paths)
+  - [Using docker as a build executor](#using-docker-as-a-build-executor)
+  - [Enable Windows PSRemoting](#enable-windows-psremoting)
   - [Delete Jenkins workspace @tmp files using crontab and scheduler](#delete-jenkins-workspace-tmp-files-using-crontab-and-scheduler)
     - [Linux](#linux)
     - [Windows](#windows)
   - [Custom scripts:](#custom-scripts)
-    - [(Linux) Display all characters between 'Version' and ']' characters](#linux-display-all-characters-between-version-and--characters)
-    - [(Powershell) Display version number from a file](#powershell-display-version-number-from-a-file)
-    - [(Linux) Date format](#linux-date-format)
-    - [(Windows) Date format](#windows-date-format)
+    - [Linux (Python) - Cloning docker images from one repo to another](#linux-python---cloning-docker-images-from-one-repo-to-another)
+    - [Linux (bash) - Change file encoding from CRLF to LF](#linux-bash---change-file-encoding-from-crlf-to-lf)
+    - [Linux (bash) - Change file encoding from CRLF to LF (path is passed as argument)](#linux-bash---change-file-encoding-from-crlf-to-lf-path-is-passed-as-argument)
+    - [Linux (bash) - Change file encoding from CRLF to LF with prompt (path is passed as argument)](#linux-bash---change-file-encoding-from-crlf-to-lf-with-prompt-path-is-passed-as-argument)
+    - [Linux (bash) - Display all characters between 'Version' and '\]' characters](#linux-bash---display-all-characters-between-version-and--characters)
+    - [Windows (Powershell) - Display version number from a file](#windows-powershell---display-version-number-from-a-file)
+    - [Linux (bash) - Date format](#linux-bash---date-format)
+    - [Windows (Powershell) - Date format](#windows-powershell---date-format)
   - [Additional links:](#additional-links)
-  - [Shared libraries links](#shared-libraries-links)
 
 ## Jenkins Job DSL API
 
@@ -82,6 +90,9 @@ The Active Choices plugin allows the creation of dynamic and interactive paramet
 ### AnsiColor ([Official Site](https://plugins.jenkins.io/ansicolor))
 This plugin adds support for ANSI escape sequences, including color, to Console Output
 
+### Authorize Project (https://plugins.jenkins.io/authorize-project)
+Configure projects to run with specified authorization.
+
 ### CloudBees Docker Build and Publish ([Official Site](https://plugins.jenkins.io/docker-build-publish))
 This plugin provides the ability to build projects with a Dockerfile, and publish the resultant tagged image (repo) to the docker registry.
 
@@ -103,6 +114,9 @@ EnvInject plugin provides the following features:
 - Exports environment variables at the end of the build in order to to know the set of environment variables used for each build
 
 - [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.step.StepContext.environmentVariables)
+
+### Extra Columns ([Official Site](https://plugins.jenkins.io/extra-columns))
+This plugin is supposed to group multiple extra columns in one convenient plug-in. Maybe other simple column plug-ins can be merged into this one in the future.
 
 ### Git Parameter ([Official Site](https://plugins.jenkins.io/git-parameter))
 Adds ability to choose branches, tags or revisions from git repository configured in project.
@@ -192,6 +206,13 @@ Add links in the sidebar of the Jenkins main page, view tabs and project pages.T
 ### Simple Theme ([Official Site](https://plugins.jenkins.io/simple-theme-plugin))
 This plugin allows to customize Jenkin's appearance with custom CSS and JavaScript. It also allows to replace the Favicon. 
 
+Add the following under -> Jenkins > Configure System > Theme
+
+- https://cdn.rawgit.com/afonsof/jenkins-material-theme/gh-pages/dist/material-cyan.css
+- https://tobix.github.io/jenkins-neo2-theme/dist/neo-light.css
+
+More info [here](https://github.com/jenkinsci/simple-theme-plugin).
+
 ### Slack Notification ([Official Site](https://plugins.jenkins.io/slack))
 Provides Jenkins notification integration with Slack or Slack compatible applications like RocketChat and Mattermost.
 
@@ -211,69 +232,232 @@ Once this plugin is installed, see http://yourserver/jenkins/userContent.git in 
 This plugin makes it possible to publish the test results of an execution of a testing tool in Jenkins. 
 - [DSL information](https://jenkinsci.github.io/job-dsl-plugin/#method/javaposse.jobdsl.dsl.helpers.publisher.PublisherContext.archiveXUnit)
 
+## Jenkins useful folder paths
+
+| definition   | description                                                                                          | path                      |
+| -------------|------------------------------------------------------------------------------------------------------|---------------------------|
+| jenkins_home | jenkins default installation path                                                                    | /var/lib/jenkins          |
+| jobs         | place where builds status are stored                                                                 | $jenkins_home/jobs        |
+| userContent  | place to store static files and serve them as a url                                                  | $jenkins_home/userContent |
+| workspace    | place where projects are cloned                                                                      | $jenkins_home/workspace   |
+| plugins      | place where plugins are installed                                                                    | $jenkins_home/plugins     |
+| jenkins.war  | place where jenkins.war file is located as a service ($> whereis jenkins )                           | /usr/share/jenkins        |
+| jenkins      | In order to pass Java arguments to Jenkins you need to change the Jenkins service configuration file | /etc/default/jenkins      |
+| jenkins.log  | log file of jenkins                                                                                  | /var/log/jenkins          |
+
+## Using docker as a build executor
+
+1. Install Docker Plugin.
+2. Configure Jenkins to work with docker: Manage Jenkins > Configure system > Cloud > docker like the image below. 
+![cloud_docker_configuration](images/cloud_docker_configuration.jpg "cloud_docker_configuration")
+3. Now that you have the slave configurations ready, you can create a job, select “Restrict where this project can be run” option and select the docker host as slave using the label as shown below.
+![docker_slave_agent.jpg](images/docker_slave_agent.jpg) "docker_slave_agent.jpg")
+
+
+## Enable Windows PSRemoting
+```powershell
+Enable-PSRemoting -Force
+winrm set winrm/config/service/Auth '@{Basic="true"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="1024"}'
+```
+
 ## Delete Jenkins workspace @tmp files using crontab and scheduler
 
 ### Linux
 
 To edit or create your own crontab file (for specific user), type the following command at the UNIX / Linux shell prompt:
 
-    $ crontab -e
+```sh
+$> crontab -e
+```
 
 Then type in the file:
 
-    # Delete Jenkins @tmp folders in /var/lib/jenkins/workspace. From mon-fri at 09:00
-    0 9 * * 1-5 rm -rf /var/lib/jenkins/workspace/*@tmp
+```sh
+# Delete Jenkins @tmp folders in /var/lib/jenkins/workspace. From mon-fri at 09:00
+0 9 * * 1-5 rm -rf /var/lib/jenkins/workspace/*@tmp
+```
 
 After saving a new file (username) will be created in: /var/spool/cron/crontabs/
 
 To check if the cron has been run we perform the following command:
-
-    $> tailf -n 100 /var/log/syslog | grep CRON
+```sh
+$> tailf -n 100 /var/log/syslog | grep CRON
+```
 
 ### Windows
 
 Open "Task Scheduler" and add the "delete_jenkins" task.
 
 We will start Powershell program with arguments:
-
-    Program: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-    Arguments: Remove-Item -Path C:\Jenkins\workspace\* -Filter *@tmp
-
+```powershell
+Program: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Arguments: Remove-Item -Path C:\Jenkins\workspace\* -Filter *@tmp
+```
 We add the desired trigger, for example everyday at 09:00 am.
 
 ## Custom scripts:
 
-### (Linux) Display all characters between 'Version' and ']' characters
-    version=$(sed -n '1p' changelog.txt | sed 's/.*Version \(.*\)].*/\1/')
-    # ------------------------------- #
-    Example:
-    changelog.txt
-    [Version 1.0.0] 2018/01/01
-    Output: 1.0.0
+### Linux (Python) - Cloning docker images from one repo to another
 
-### (Powershell) Display version number from a file
+```python
+# This progam clones docker images from one repo (harbor) to another (azure container registry)
 
-    # --- Getting service version --- #
-    $file = "$env:WORKSPACE/changelog.txt"
-    $version=Get-Content $file -TotalCount 1
-    $version -Match '(?s)\[.*?]+' | Out-Null
-    $version1 = $Matches.Values
-    $version2=$version1.Remove(0,9)
-    $finalversion=$version2 -replace ".{1}$"
-    echo $finalversion
-    # ------------------------------- #
-    Example:
-    changelog.txt
-    [Version 1.0.0]
-    Output: 1.0.0
+import datetime
+import time
+import docker
 
-### (Linux) Date format
+fromrepo = ('<user>', '<password>', '<origin_repo>')
+fromrepoproject = '/cloudmaster'
+torepo = ('<user>', '<password>', '<destination_repo>')
+images = {'/jenkins':'1.1.0',
+        '/nginx':'2.0.0'
+        }
 
-    echo Date: $(date +"%Y/%m/%d at %T")
+client = docker.from_env()
 
-### (Windows) Date format
+start = datetime.datetime.now()
+start_time = time.time()
 
-    Get-Date -UFormat "%Y/%m/%d at %H:%M:%S"
+for repo in fromrepo,torepo:
+    client.login(username=repo[0], password=repo[1], registry=repo[2])
+    print('Login in -> '+ repo[2] + ' <- succeeded!')
+
+for image,tag in sorted(images.items()):
+    origin = fromrepo[2]+fromrepoproject+image+':'+tag
+    destination = torepo[2]+image+':'+tag
+
+    print('Pulling the following image: ' + origin)
+    client.images.pull(origin)
+    print('Tagging the following image: ' + origin)
+    client.images.get(origin).tag(torepo[2]+image, tag)
+    print('Pushing the following image: ' + destination)
+    client.images.push(torepo[2]+image, tag)
+    print('Removing generated images: ' + origin + ' and ' + destination )
+    client.images.remove(origin, True)
+    client.images.remove(destination, True)
+
+client.images.list()
+
+finish = datetime.datetime.now()
+
+print("The process started at: " + start.strftime("%Y/%m/%d %H:%M:%S") + " and finished at: " + finish.strftime("%Y/%m/%d %H:%M:%S"))
+print("The execution took: %s seconds." % (time.time() - start_time))
+```
+
+### Linux (bash) - Change file encoding from CRLF to LF
+
+```sh
+#!/bin/bash
+
+# This script changes the line enconding to Linux LF
+for file in $(find $directory -type f -name "*.sls")
+do
+	dos2unix $file
+done
+```
+
+### Linux (bash) - Change file encoding from CRLF to LF (path is passed as argument)
+
+```sh
+#!/bin/bash
+
+displayError()
+{
+  echo "Error!"
+  echo "Usage: $0 <path>"
+  exit 1
+}
+
+if (($# < 1)); then
+  displayError
+fi
+
+# This script changes the line enconding to Linux LF
+for file in $(find $1 -type f -name "*.sls")
+do
+  dos2unix $file
+done
+```
+
+### Linux (bash) - Change file encoding from CRLF to LF with prompt (path is passed as argument)
+
+```sh
+#!/bin/bash
+
+# This script changes the line enconding to Linux LF
+
+displayError()
+{
+  echo "Error!"
+  echo "Usage: $0 <path>"
+  exit 1
+}
+
+if (($# < 1)); then
+  displayError
+fi
+
+echo "The following files will be changed:"
+echo "------------------------------------"
+for file in $(find $1 -type f -name "*.sls")
+do
+  ls $file
+done
+echo "------------------------------------"
+
+read -r -p "Are you sure? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+then
+  for file in $(find $1 -type f -name "*.sls")
+  do 
+    dos2unix $file
+  done
+else
+    echo "Aborted"
+fi
+```
+
+### Linux (bash) - Display all characters between 'Version' and '\]' characters
+
+```sh
+version=$(sed -n '1p' changelog.txt | sed 's/.*Version \(.*\)].*/\1/')
+# ------------------------------- #
+Example:
+changelog.txt
+[Version 1.0.0] 2018/01/01
+Output: 1.0.0
+```
+
+### Windows (Powershell) - Display version number from a file
+
+```powershell
+# --- Getting service version --- #
+$file = "$env:WORKSPACE/changelog.txt"
+$version=Get-Content $file -TotalCount 1
+$version -Match '(?s)\[.*?]+' | Out-Null
+$version1 = $Matches.Values
+$version2=$version1.Remove(0,9)
+$finalversion=$version2 -replace ".{1}$"
+echo $finalversion
+# ------------------------------- #
+Example:
+changelog.txt
+[Version 1.0.0]
+Output: 1.0.0
+```
+
+### Linux (bash) - Date format
+
+```sh
+echo Date: $(date +"%Y/%m/%d at %T")
+```
+### Windows (Powershell) - Date format
+
+```powershell
+Get-Date -UFormat "%Y/%m/%d at %H:%M:%S"
+```
 
 ## Additional links:
 - [Install Powershell 5 in Windows Server 2008 R2](https://www.rootusers.com/install-powershell-5-windows-server-2008-r2/)
@@ -311,7 +495,7 @@ We add the desired trigger, for example everyday at 09:00 am.
 - [Verify if crontab works](https://askubuntu.com/questions/85558/verify-if-crontab-works)
 - [How to redirect output to a file from within cron?](https://unix.stackexchange.com/questions/52330/how-to-redirect-output-to-a-file-from-within-cron)
 - [how to run cron jobs as a specific user other than root in linux](http://www.lostsaloon.com/technology/how-to-run-cron-jobs-as-a-specific-user/)
-- [Gray filled box icon](https://www.iconsdb.com/gray-icons/filled-box-icon.html)
+- [Gray filled box icon - default 24x24](https://www.iconsdb.com/gray-icons/filled-box-icon.html)
 - [Error: Error applying plan: 1 error(s) occurred: * vsphere_virtual_machine.vm_3: cannot locate virtual machine or template with UUID "423908f8-54b3-432c-5f2b-ff6b8aee5a32": ServerFaultCode: The session is not authenticated](https://github.com/terraform-providers/terraform-provider-vsphere/issues/664)
 - [How do I display all the characters between two specific strings?](https://unix.stackexchange.com/questions/273496/how-do-i-display-all-the-characters-between-two-specific-strings)
 - [Jenkins Pipeline](https://santoshbandage.wordpress.com/2017/06/12/why-pipeline/)
@@ -333,12 +517,40 @@ We add the desired trigger, for example everyday at 09:00 am.
 - [Changing Jenkins build number](https://stackoverflow.com/questions/19645430/changing-jenkins-build-number)
 - [Jenkins pipeline plugin: set the build description](https://stackoverflow.com/questions/36501203/jenkins-pipeline-plugin-set-the-build-description)
 - [HTML in job descriptions on jenkins](https://www.edureka.co/community/13612/html-in-job-descriptions-on-jenkins)
-
-## Shared libraries links
-- [Jenkins DevOps Shared Libraries](https://github.com/mschuchard/jenkins-devops-libs)
-- [jenkins-shared-library-framework](https://github.com/devopscube/jenkins-shared-library-framework)
-- [Project Piper Repository](https://github.com/SAP/jenkins-library)
-- [CFPB Jenkins Pipeline Shared Libraries](https://github.com/cfpb/jenkins-shared-libraries)
+- [Useful Groovy String Functions](https://blogs.oracle.com/fadevrel/useful-groovy-string-functions)
+- [Groovy For Loop Examples](http://grails.asia/groovy-for-loop-examples)
+- [Lists in Groovy](https://www.baeldung.com/groovy-lists)
+- [Online Groovy Compiler](https://www.jdoodle.com/execute-groovy-online)
+- [How to join multiple lines of file names into one with custom delimiter?](https://stackoverflow.com/questions/2764051/how-to-join-multiple-lines-of-file-names-into-one-with-custom-delimiter)
+- [How do I view all available HDD's/partitions?](https://askubuntu.com/questions/182446/how-do-i-view-all-available-hdds-partitions)
+- [Jenkins: no tool named MSBuild found](https://stackoverflow.com/questions/45418333/jenkins-no-tool-named-msbuild-found)
+- [Running msbuild on jenkinsfile](https://github.com/TorchAPI/Essentials/blob/master/Jenkinsfile)
+- [Passing Jenkins environment variable in Powershell script](https://stackoverflow.com/questions/50547232/passing-jenkins-environment-variable-in-powershell-script)
+- [Tutorial de Python virtualenv](https://rukbottoland.com/blog/tutorial-de-python-virtualenv/)
+- [winrm : http error 401 although correct credential supplied](https://github.com/hashicorp/terraform/issues/2918)
+- [Enable-PSRemoting](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/enable-psremoting?view=powershell-5.1)
+- [MSBuild github repository](https://github.com/microsoft/msbuild/releases)
+- [Microsoft Build Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48159)
+- [specify project file of a solution using msbuild](https://stackoverflow.com/questions/13915636/specify-project-file-of-a-solution-using-msbuild)
+- [Jenkins Pipeline syntax](https://jenkins.io/doc/book/pipeline/syntax/)
+- [Jenkins ext-email plugin fails to send email on build success (file size too big)](https://stackoverflow.com/questions/16191040/jenkins-ext-email-plugin-fails-to-send-email-on-build-success)
+- [Parameterized Scheduler](https://github.com/jenkinsci/parameterized-scheduler-plugin/blob/master/README.md)
+- [SSH login without password](http://www.linuxproblem.org/art_9.html)
+- [TFS and Jenkins Integration](https://blogs.msdn.microsoft.com/wushuai/2016/12/31/tfs-and-jenkins-integration/)
+- [How do I specify the platform for MSBuild?](https://stackoverflow.com/questions/3155492/how-do-i-specify-the-platform-for-msbuild)
+- [Build fails with 'process apparently never started' error](https://support.cloudbees.com/hc/en-us/articles/360029374071-Build-fails-with-process-apparently-never-started-error)
+- [Instalación de Jenkins con Docker](https://aprenderdevops.com/instalacion-de-jenkins-con-docker/)
+- [Where to set -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=300](https://stackoverflow.com/questions/50067372/where-to-set-dorg-jenkinsci-plugins-durabletask-bourneshellscript-heartbeat-che)
+- [How to add Java arguments to Jenkins?](https://support.cloudbees.com/hc/en-us/articles/209715698-How-to-add-Java-arguments-to-Jenkins-)
+- [default jenkins file example for checking JAVA_ARGS](https://salsa.debian.org/qa/jenkins.debian.net/blob/d27b06a6244d53e8564e63e5e550b1881a2cffdd/hosts/jenkins/etc/default/jenkins)
+- [durable-task plugin v1.30 and v1.31 - process aparently never started in /var/lib/jenkins/workspace/jobname](https://issues.jenkins-ci.org/browse/JENKINS-59838)
+- [Logging](https://wiki.jenkins.io/display/JENKINS/Logging)
+- [byobu - How can I reattach to my byobu/tmux session?](https://stackoverflow.com/questions/44555703/how-can-i-reattach-to-my-byobu-tmux-session)
+- [durabletask v1.33 - process apparently never started in /var/lib/jenkins/workspace/local-cloud-regression-test@tmp/durable-fa896164](https://issues.jenkins-ci.org/browse/JENKINS-60107)
+- [Demo image for Jenkins Configuration-as-Code](https://github.com/oleg-nenashev/demo-jenkins-config-as-code)
+- [jenkins-shared-library-example](https://github.com/aleksei-bulgak/jenkins-shared-library-example)
 - [jenkins-pipeline-shared-lib](https://github.com/BCDevOps/jenkins-pipeline-shared-lib)
-- [Jenkins Pipeline Shared Library Sample](https://github.com/AndreyVMarkelov/jenkins-pipeline-shared-lib-sample)
-- [Jenkins Pipeline Shared Library Gradle Plugin](https://github.com/mkobit/jenkins-pipeline-shared-library-example)
+- [jenkins-library](https://github.com/zowe/jenkins-library)
+- [jenkins-shared-libraries](https://github.com/cfpb/jenkins-shared-libraries)
+- [ods-jenkins-shared-library](https://github.com/opendevstack/ods-jenkins-shared-library)
+- [How To Build Your Own Jenkins Shared Library](https://medium.com/@werne2j/how-to-build-your-own-jenkins-shared-library-9dc129db260c)

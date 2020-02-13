@@ -1,0 +1,11 @@
+<strong>sendEmail(String state, String emailaccount)</strong>
+<p>
+    Sends an email to with the state header and to the selected email account.
+</p>
+<p>
+    <strong>Defaults:</strong>
+    <ul>
+        <li>state: 'failed'</li>
+        <li>emailaccount: 'myemail@myemail.com'</li>
+    </ul>
+</p>
