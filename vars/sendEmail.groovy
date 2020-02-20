@@ -16,7 +16,7 @@ import com.mycompany.Logger
  */
 def call(String state = 'failed', String emailaccount = 'myemail@myemail.com') {
     def logger = new Logger()
-    logger.info("Sending email to: ${emailaccount} ")
+    logger.info("Sending email to: ${emailaccount}")
     emailext (
         subject: "${env.JOB_NAME} (${env.BUILD_NUMBER}) ${state}",
         body: '''${SCRIPT, template="groovy-html.template"}''',

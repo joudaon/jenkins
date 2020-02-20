@@ -12,16 +12,17 @@ import com.mycompany.Logger
  * Example usage within a declarative pipeline:
  *
  *    steps {
- *        getServiceVersion ('mypath', 'mychangelog', 'myservice')
+ *        getServiceVersion ('my/path/changelog.txt', 'myservice')
  *    }
  *
- * @param changelogpath (String) location of changelog file.
- * @param changelogfilename (String) name of changelog file.
+ * @param fullchangelogpath (String) location of changelog file.
  * @param servicename (String) name of the service we are working on (lowercase).
  */
-def call(String changelogpath = '.', String changelogfilename = 'changelog.txt', String servicename = 'servicename') {
+def call(String fullchangelogpath = 'my/path/changelog.txt', String servicename = 'servicename') {
     def logger = new Logger()
-    logger.info("Reading log file: ${changelogpath}/${changelogfilename} ")
+    def changelogpath = fullchangelogpath.tokenize('/')[0..-2].join('/')
+    def changelogfilename = fullchangelogpath.tokenize('/')[-1].tokenize('.')[0] 
+    logger.info("Reading log file: ${changelogpath}/${changelogfilename}")
     try {
         if ( isUnix() ) {
             sh """

@@ -12,7 +12,7 @@ import com.mycompany.Logger
  *    }
  *
  * @param gradlefilepath (String) path were build.gradle file is.
- * @param gradletasks (String) tasks to be run. If more than one use empty space
+ * @param gradletasks (String) tasks to be run. If more than one, use empty space
           "build check test shadowJar"
  */
 def call(String gradlefilepath = '.', String gradletasks = 'build') {
